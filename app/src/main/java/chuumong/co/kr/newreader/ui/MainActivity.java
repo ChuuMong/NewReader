@@ -1,6 +1,7 @@
 package chuumong.co.kr.newreader.ui;
 
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -12,8 +13,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
 import chuumong.co.kr.newreader.R;
+import chuumong.co.kr.newreader.ui.fragment.FragmentFactory;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+
     private static final String TAG = MainActivity.class.getSimpleName();
 
     @Override
@@ -62,10 +65,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         item.setChecked(false);
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.file_open:
                 Log.i(TAG, "File Open");
-
+                Fragment fm = FragmentFactory.getinstance().get("FileFragment");
+                getSupportFragmentManager().beginTransaction().replace(R.id.main_frame, fm).commit();
                 break;
             case R.id.go_page:
                 Log.i(TAG, "go_page");
